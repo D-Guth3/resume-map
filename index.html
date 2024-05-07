@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<!-- Use the HTML and CSS you developed in module 01 to fill out this template.-->
+
 
 <head>
   <meta charset=utf-8 />
@@ -22,31 +22,30 @@
     /* The map element */
 
     body {
-    background: #cfdacd;
+    background: #364042;
   
-}
+    }
     
     
     #map {
       width: 100%;
       height: 500px;
-      background-color:antiquewhite;
+      background-color: #aa7700;
     }
 
     /* Add HTML element styles */
     h1 {
-    font-size: 2.5em;
-    letter-spacing: .04em;
-    font-family: "Lora", serif;
-    text-align: center;
+      font-size: 2.5em;
+      letter-spacing: .04em;
+      font-family: "Lora", serif;
+      text-align: center;
     } 
 
     p {
-  font-size: 1.1em;
-  line-height: 1.5em;
-  text-align: center;
-  
-  }
+      font-size: 1.1em;
+      line-height: 1.5em;
+      text-align: center;
+    }
 
   .leaflet-popup-content h3 {
     font-family: "Lora", serif;
@@ -63,8 +62,9 @@
   }
 
 
-    /* Change opacity on hover over the icon class */
 
+
+    /* Opacity on hover over the icon class */
     .icon:hover {
       opacity: .8;
 
@@ -79,7 +79,7 @@
 <body>
 
   <header>
-    <h1>My Resume Mapped 🤓</h1>
+    <h1>I call it a Resu-Map 🤓</h1>
   </header>
 
   <section>
@@ -88,13 +88,15 @@
 
   <section>
 
-    <p>Work in progress... description in progress as well <a href="#">🤓</a>. </p>
+    <p>I made a map of my resume. Work in progress... <a href="#">🤓</a>. </p>
 
   </section>
   <footer>
-    <p>Map authored by Darren Guthrie.</br>
+    <p>Authored by Darren Guthrie.</br>
       See more projects on GitHub: <a href="https://github.com/D-Guth3"> D-Guth3</a></p>
-      SVG source: Diyah Farida from <a href="https://thenounproject.com/browse/icons/term/geospatial-technology/" target="_blank" title="geospatial technology Icons">Noun Project</a> (CC BY 3.0)
+      
+      <!-- <element class="citation">   not sure how to do it  just yet -->
+        SVG source: Diyah Farida from <a href="https://thenounproject.com/browse/icons/term/geospatial-technology/" target="_blank" title="geospatial technology Icons">Noun Project</a> (CC BY 3.0)
     <hr>
 
     <a href="https://newmapsplus.github.io">
@@ -111,139 +113,152 @@
   <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
   
   <script>
-    var map = L.map('map', {
-    center: [40.417466497138875, -105.48951986010964],
-    zoom: 5,
-    
+  
+
+
+
+var map = L.map('map').setView([41.006436175715315, -107.60583555488209],5);
+
+
+
+var tiles = L.tileLayer('https://tiles.stadiamaps.com/tiles/stamen_toner_background/{z}/{x}/{y}{r}.{ext}', {
+  attribution: '&copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://www.stamen.com/" target="_blank">Stamen Design</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+  subdomains: 'abcd',
+  minZoom: 5,
+  maxZoom: 16,
+  ext: 'png'
+}).addTo(map);
+
+/* map.style.background = '#e88b38'; 
+map.style.boxShadow = '0 0 10px 5px #aa7700'; */
+
+
+var Stadia_AlidadeSatellite = L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_satellite/{z}/{x}/{y}{r}.{ext}', {
+    minZoom: 5,
+    maxZoom: 16,
+    attribution: '&copy; CNES, Distribution Airbus DS, © Airbus DS, © PlanetObserver (Contains Copernicus Data) | &copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    ext: 'jpg'
 });
 
 
-
-    // Get basemap URL from Leaflet Providers
-    var basemap_url = 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png'
-
-    // Get basemap attributes from Leaflet Providers
-   var basemap_attributes = {
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-      subdomains: 'abcd',
-      maxZoom: 20
-    };
-    //request map tiles
-    var tiles = L.tileLayer(basemap_url, basemap_attributes );
-
-    map.addLayer(tiles);
+//leaflet layer control
+var baseMaps = {
+  'Basemap Map': tiles,
+  'Satellite View': Stadia_AlidadeSatellite
+}
+L.control.layers(baseMaps).addTo(map);
 
     //Build object
     var hotspots = [
     {
         name: "University of California , Davis",
         properties: {
-            description: "Studied History and Anthropology",
+            title: " Undergrad. bachelor's degree in History/Anthro",
             coordinates: [38.538428545424765, -121.75289230541095],
-            url: 'https://www.fws.gov/refuge/merced',
-            phone: '+12098263508',
-            icon: 'svg/geospatial_pin.svg'
+            exp: '',
+            timeSpent: '2 years',
+            icon: 'svg/noun-college-6671503.svg'
         }
     },
     {
         name: "Central Washington University",
         properties: {
-            description: "Learned the meat and potatos of GIS ",
+            title: "Geographic Information Systems Cert.",
             coordinates: [47.00331752393596, -120.53776961209512],
-            url: 'GIS Certification',
-            phone: '+12097226894',
-            icon: 'svg/geospatial_pin.svg'
+            exp: 'Learned the meat and potatos of GIS ',
+            timeSpent: '1 year',
+            icon: 'svg/noun-college-6671503.svg'
         }
     },
 
     {
         name: "University of Kentucky",
         properties: {
-            description: "Finally scratching the itch to learn programming, Open Source Technologies and Web GIS!",
+            title: "Masters Degree in Digital Mapping",
             coordinates: [38.02955520572217, -84.50219716303796],
-            url: 'Masters Degree in Digital Mapping',
-            phone: '+12098263508',
-            icon: 'svg/geospatial_pin.svg'
+            exp: 'Finally scratching the itch to learn programming, Open Source Technologies and Web GIS!',
+            timeSpent: 'Started 01/2024 - completion due 2026',
+            icon: 'svg/noun-college-6671503.svg'
         }
     },
 
     {
         name: "Forest Service",
         properties: {
-            description: "sketch maps, topos, flag, tag and bag Archaeology",
+            title: "Archaeological Field Tech",
             coordinates: [48.47895370379705, -120.18919099667002],
-            url: 'Archaeological Field Tech',
-            phone: '+12097232401',
+            exp: 'Classic cultural resource managment: sketch maps, topos, flag, tag and bag Archaeology',
+            timeSpent: '1 field season (seasonal)',
             icon: 'svg/geospatial_pin.svg'
         }
     },
     {
         name: "Forest Service",
         properties: {
-            description: "Archaeology GIS!",
+            title: "Archaeological Field Tech",
             coordinates: [37.23221164342083, -119.50923388316328],
-            url: 'Archaeological Field Tech',
-            phone: '+12097228200',
+            exp: 'Archaeology GIS!',
+            timeSpent: '1 field season (seasonal)',
             icon: 'svg/geospatial_pin.svg'
         }
     },
     {
         name: "Apple Inc.",
         properties: {
-            description: "Not actual office location since worked at a 'black site', Went from Editor > QA > Team Lead > Shift Lead",
+            title: "GIS Tech",
             coordinates: [37.33464719422189, -122.00899119088547],
-            url: 'GIS Tech',
-            phone: '+12093881090',
+            exp: 'Not actual office location since worked at a "black site", Went from Editor > QA > Team Lead > Shift Lead',
+            timeSpent: '1.5 Years (contract)',
             icon: 'svg/geospatial_pin.svg'
         }
     },
     {
         name: "Apple Inc.",
         properties: {
-            description: "Not actual office location since worked at a 'black site', learned about post production maps, sources and maintenance",
+            title: "GIS Analyst",
             coordinates: [37.33168466950308, -122.0301291148911],
-            url: 'GIS Analyst',
-            phone: 'cant remember time line date',
+            exp: 'Not actual office location since worked at a "black site", learned about post production maps, sources and maintenance',
+            timeSpent: '3 years (contract)',
             icon: 'svg/geospatial_pin.svg'
         }
     },
     {
         name: "PG&E",
         properties: {
-            description: "100% remote, Excell work and learned lots of Command Line Interface in spare time",
+            title: "GIS Asset Strategist ",
             coordinates: [37.77785222125378, -121.96659788818803],
-            url: 'title here',
-            phone: 'Date here',
+            exp: '100% remote, Excell work and learned lots of Command Line Interface in spare time',
+            timeSpent: '1 year (contract)',
             icon: 'svg/geospatial_pin.svg'
         }
     },
     {
         name: "Apple Inc.",
         properties: {
-            description: "Apple annotation work, no idea where this data went. Spent a lot of personal time learning BASH and python with QGIS",
+            title: "GIS Editor",
             coordinates: [37.31671404680281, -122.05195348878581],
-            url: 'GIS tech',
-            phone: 'Need to pull up resume',
+            exp: 'Apple annotation work, no idea where this data went. Spent a lot of personal time learning BASH and python with QGIS',
+            timeSpent: '6 months (contract)',
             icon: 'svg/geospatial_pin.svg'
         }
     },
     {
         name: "Zoox",
         properties: {
-            description: "annotation work",
+            title: "Cartographer",
             coordinates: [37.57173321984548, -122.26613911793154],
-            url: 'cartographer',
-            phone: '02/23-08/23',
+            exp: 'Lots of road network annotation and CLI tools. Working at Zoox was really inspiring to go back to school. So much cool stuff going on there!',
+            timeSpent: '6 months (contract)',
             icon: 'svg/geospatial_pin.svg'
         }
     },
     {
         name: "Uber Technologies",
         properties: {
-            description: "Current gig",
+            title: "Operations Support",
             coordinates: [37.37713778058374, -122.03367224710527],
-            url: 'soon to be titles',
-            phone: '+12097258587',
+            exp: 'Learning a lot about the PUDO aspects of navigation mapping and scaling work up for offshore operations. Came in at an interestin time with LLMs emerging 🤫',
+            timeSpent: '8 months & Current',
             icon: 'svg/geospatial_pin.svg'
         }
     },
@@ -260,11 +275,12 @@ for (var i = 0; i < hotspots.length; i++) {
     //Coordinates
     var coordinates = properties.coordinates;
 
-    //pop up content
-    var popup = `<h3>${hotspot.name}</h3>
-                        <p>${hotspot.properties.description}</p>
-                        <p><b>Website</b>: <a href='${hotspot.properties.url}'>Visit</a></p>
-                        <p><b>Phone</b>: ${hotspot.properties.phone}</p>`;
+    //build popup content
+    var popup = 
+      `<h3><center>${hotspot.name}</h3>
+       <p><b>${hotspot.properties.title}</p>
+        <p>${hotspot.properties.exp}</p>
+        <p>Duration</b>: ${hotspot.properties.timeSpent}</p></center>`;
 
     //icon adjustment
     var icon = L.icon({
