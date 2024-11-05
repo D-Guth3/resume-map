@@ -1,45 +1,34 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 
 <head>
-  <meta charset=utf-8 />
+  <meta charset="utf-8" />
   <title>DKG Resume</title>
-
-  <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
-  <link rel='icon' href='https://newmapsplus.github.io/favicon.ico' type='image/x-icon' />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <link rel="icon" href="https://newmapsplus.github.io/favicon.ico" type="image/x-icon" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.css" />
-
-  
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Raleway:ital,wght@0,100..900&display=swap" rel="stylesheet" />
 
   <style>
-    /* The map element */
-
     body {
-    background: #364042;
-  
+      background: #364042;
+      font-family: "Lora", serif;
+      color: #f8f9fa;
     }
-    
-    
+
     #map {
       width: 100%;
       height: 500px;
       background-color: #aa7700;
     }
 
-    /* Add HTML element styles */
     h1 {
       font-size: 2.5em;
       letter-spacing: .04em;
-      font-family: "Lora", serif;
       text-align: center;
-    } 
+    }
 
     p {
       font-size: 1.1em;
@@ -47,279 +36,247 @@
       text-align: center;
     }
 
-  .leaflet-popup-content h3 {
-    font-family: "Lora", serif;
-    font-size: 1.3em;
-    margin-bottom: 6px;
-  }
-  .leaflet-popup-content p {
-    font-family: "Raleway", sans-serif;
-    margin: 3px 0 6px;
-    font-size: 1.1em;
-  }
-  .leaflet-popup-content a {
-    font-weight: normal;
-  }
+    .leaflet-popup-content h3,
+    .leaflet-popup-content p {
+      font-family: "Raleway", sans-serif;
+    }
 
-
-
-
-    /* Opacity on hover over the icon class */
     .icon:hover {
       opacity: .8;
-
     }
-    
 
+    footer {
+      background-color: #343a40;
+      padding: 1em 0;
+    }
 
-
+    .btn-custom {
+      background-color: #6c757d;
+      color: #f8f9fa;
+    }
   </style>
 </head>
 
 <body>
 
-  <header>
+  <header class="container-fluid bg-dark text-white py-3 text-center">
     <h1>I call it a Resu-Map 🤓</h1>
   </header>
 
-  <section>
-    <div id='map'></div>
+  <section class="container my-4">
+    <div id="map"></div>
   </section>
 
-  <section>
-
-    <p>I made a map of my resume. Work in progress... <a href="#">🤓</a>. </p>
-
+  <section class="container text-center my-3">
+    <p>I made a map of my resume. Hover over each tooltip to view name. Click for more details.</p>
+    <button class="btn btn-custom mt-2" id="toggle-education-btn">Toggle Education</button>
+    <button class="btn btn-custom mt-2" id="toggle-work-btn">Toggle Work Experience</button>
   </section>
-  <footer>
-    <p>Authored by Darren Guthrie.</br>
-      See more projects on GitHub: <a href="https://github.com/D-Guth3"> D-Guth3</a></p>
-      
-      <!-- <element class="citation">   not sure how to do it  just yet -->
-        SVG source: Diyah Farida from <a href="https://thenounproject.com/browse/icons/term/geospatial-technology/" target="_blank" title="geospatial technology Icons">Noun Project</a> (CC BY 3.0)
-    <hr>
 
+  <footer class="container-fluid text-center text-white">
+    <p>Authored by Darren Guthrie.<br />See more projects on GitHub: <a href="https://github.com/D-Guth3" class="text-info">D-Guth3</a></p>
+    <p>SVG source: Diyah Farida from <a href="https://thenounproject.com/browse/icons/term/geospatial-technology/" target="_blank" title="geospatial technology Icons" class="text-info">Noun Project</a> (CC BY 3.0)</p>
+    <hr class="bg-light" />
     <a href="https://newmapsplus.github.io">
-      <img src="https://newmapsplus.github.io/assets/graphics/logo-2018-nmp-75px-h-gray.png"
-        alt="University of Kentucky Geography">
+      <img src="https://newmapsplus.github.io/assets/graphics/logo-2018-nmp-75px-h-gray.png" alt="University of Kentucky Geography">
     </a>
-
     <a href="https://uky-gis.github.io">
-      <img src="https://newmapsplus.github.io/assets/graphics/logo-2018-geography-75px-h.png"
-        alt="University of Kentucky Geography">
+      <img src="https://newmapsplus.github.io/assets/graphics/logo-2018-geography-75px-h.png" alt="University of Kentucky Geography">
     </a>
   </footer>
- 
-  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-  
+
+  <!-- Load Bootstrap and Leaflet JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
   <script>
-  
+    // Initialize map
+    var map = L.map('map').setView([41.006436175715315, -107.60583555488209], 5);
 
+    // Add tile layer
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+      attribution: '&copy; OpenStreetMap &copy; CARTO',
+      maxZoom: 20,
+    }).addTo(map);
 
-
-var map = L.map('map').setView([41.006436175715315, -107.60583555488209],5);
-
-
-
-/* var tiles = L.tileLayer('https://tiles.stadiamaps.com/tiles/stamen_toner_background/{z}/{x}/{y}{r}.{ext}', {
-  attribution: '&copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://www.stamen.com/" target="_blank">Stamen Design</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-  subdomains: 'abcd',
-  minZoom: 5,
-  maxZoom: 16,
-  ext: 'png'
-}).addTo(map); */
-
-/* map.style.background = '#e88b38'; 
-map.style.boxShadow = '0 0 10px 5px #aa7700'; */
-
-
-/* var Stadia_AlidadeSatellite = L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_satellite/{z}/{x}/{y}{r}.{ext}', {
-    minZoom: 5,
-    maxZoom: 16,
-    attribution: '&copy; CNES, Distribution Airbus DS, © Airbus DS, © PlanetObserver (Contains Copernicus Data) | &copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-    ext: 'jpg'
-}).addTo(map); */
-
-
-    // Get basemap URL from Leaflet Providers
-    var basemap_url = 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png'
-
-    // Get basemap attributes from Leaflet Providers
-   var basemap_attributes = {
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-      subdomains: 'abcd',
-      maxZoom: 20
-    };
-    //request map tiles
-    var tiles = L.tileLayer(basemap_url, basemap_attributes );
-
-    map.addLayer(tiles);
-
-
-/* //leaflet layer control
-var baseMaps = {
-  'Basemap Map': tiles,
-  'Satellite View': Stadia_AlidadeSatellite
-}
-L.control.layers(baseMaps).addTo(map); */
-
-    //Build object
+    // Define all hotspots
     var hotspots = [
-    {
-        name: "University of California , Davis",
+      // Education hotspots
+      {
+        name: "University of California, Davis",
         properties: {
-            title: " Undergrad. bachelor's degree in History/Anthro",
-            coordinates: [38.538428545424765, -121.75289230541095],
-            exp: '',
-            timeSpent: '2 years',
-            icon: 'svg/noun-college-6671503.svg'
+          title: "Undergrad in History/Anthro",
+          coordinates: [38.538428545424765, -121.75289230541095],
+          exp: '',
+          timeSpent: '2 years',
+          icon: 'svg/noun-college-6671503.svg'
         }
-    },
-    {
+      },
+      {
         name: "Central Washington University",
         properties: {
-            title: "Geographic Information Systems Cert.",
-            coordinates: [47.00331752393596, -120.53776961209512],
-            exp: 'Learned the meat and potatos of GIS ',
-            timeSpent: '1 year',
-            icon: 'svg/noun-college-6671503.svg'
+          title: "GIS Cert.",
+          coordinates: [47.00331752393596, -120.53776961209512],
+          exp: 'Learned the meat and potatoes of GIS',
+          timeSpent: '1 year',
+          icon: 'svg/noun-college-6671503.svg'
         }
-    },
-
-    {
+      },
+      {
         name: "University of Kentucky",
         properties: {
-            title: "Masters Degree in Digital Mapping",
-            coordinates: [38.02955520572217, -84.50219716303796],
-            exp: 'Finally scratching the itch to learn programming, Open Source Technologies and Web GIS!',
-            timeSpent: 'Started 01/2024 - completion due 2026',
-            icon: 'svg/noun-college-6671503.svg'
+          title: "Masters in Digital Mapping",
+          coordinates: [38.02955520572217, -84.50219716303796],
+          exp: 'Finally scratching the itch to learn programming, Open Source Technologies, and Web GIS!',
+          timeSpent: 'Started 01/2024 - completion due 2026',
+          icon: 'svg/noun-college-6671503.svg'
         }
-    },
-
-    {
+      },
+      // Work experience hotspots
+      {
         name: "Forest Service",
         properties: {
-            title: "Archaeological Field Tech",
-            coordinates: [48.47895370379705, -120.18919099667002],
-            exp: 'Classic cultural resource managment: sketch maps, topos, flag, tag and bag Archaeology',
-            timeSpent: '1 field season (seasonal)',
-            icon: 'svg/geospatial_pin.svg'
+          title: "Archaeological Field Tech",
+          coordinates: [48.47895370379705, -120.18919099667002],
+          exp: 'Classic cultural resource management: sketch maps, topos, flag, tag and bag Archaeology',
+          timeSpent: '1 field season (seasonal)'
         }
-    },
-    {
+      },
+      {
         name: "Forest Service",
         properties: {
-            title: "Archaeological Field Tech",
-            coordinates: [37.23221164342083, -119.50923388316328],
-            exp: 'Archaeology GIS!',
-            timeSpent: '1 field season (seasonal)',
-            icon: 'svg/geospatial_pin.svg'
+          title: "Archaeological Field Tech",
+          coordinates: [37.23221164342083, -119.50923388316328],
+          exp: 'Archaeology GIS!',
+          timeSpent: '1 field season (seasonal)'
         }
-    },
-    {
+      },
+      {
         name: "Apple Inc.",
         properties: {
-            title: "GIS Tech",
-            coordinates: [37.33464719422189, -122.00899119088547],
-            exp: 'Not actual office location since worked at a "black site", Went from Editor > QA > Team Lead > Shift Lead',
-            timeSpent: '1.5 Years (contract)',
-            icon: 'svg/geospatial_pin.svg'
+          title: "GIS Tech",
+          coordinates: [37.33464719422189, -122.00899119088547],
+          exp: 'Not actual office location since worked at a "black site", Went from Editor > QA > Team Lead > Shift Lead',
+          timeSpent: '1.5 Years (contract)'
         }
-    },
-    {
+      },
+      {
         name: "Apple Inc.",
         properties: {
-            title: "GIS Analyst",
-            coordinates: [37.33168466950308, -122.0301291148911],
-            exp: 'Not actual office location since worked at a "black site", learned about post production maps, sources and maintenance',
-            timeSpent: '3 years (contract)',
-            icon: 'svg/geospatial_pin.svg'
+          title: "GIS Analyst",
+          coordinates: [37.33168466950308, -122.0301291148911],
+          exp: 'Not actual office location since worked at a "black site", learned about post production maps, sources and maintenance',
+          timeSpent: '3 years (contract)'
         }
-    },
-    {
+      },
+      {
         name: "PG&E",
         properties: {
-            title: "GIS Asset Strategist ",
-            coordinates: [37.77785222125378, -121.96659788818803],
-            exp: '100% remote, Excell work and learned lots of Command Line Interface in spare time',
-            timeSpent: '1 year (contract)',
-            icon: 'svg/geospatial_pin.svg'
+          title: "GIS Asset Strategist",
+          coordinates: [37.77785222125378, -121.96659788818803],
+          exp: '100% remote, Excel work, and learned lots of Command Line Interface in spare time',
+          timeSpent: '1 year (contract)'
         }
-    },
-    {
+      },
+      {
         name: "Apple Inc.",
         properties: {
-            title: "GIS Editor",
-            coordinates: [37.31671404680281, -122.05195348878581],
-            exp: 'Apple annotation work, no idea where this data went. Spent a lot of personal time learning BASH and python with QGIS',
-            timeSpent: '6 months (contract)',
-            icon: 'svg/geospatial_pin.svg'
+          title: "GIS Editor",
+          coordinates: [37.31671404680281, -122.05195348878581],
+          exp: 'Apple annotation work. Spent a lot of personal time learning BASH and python with QGIS',
+          timeSpent: '6 months (contract)'
         }
-    },
-    {
+      },
+      {
         name: "Zoox",
         properties: {
-            title: "Cartographer",
-            coordinates: [37.57173321984548, -122.26613911793154],
-            exp: 'Lots of road network annotation and CLI tools. Working at Zoox was really inspiring to go back to school. So much cool stuff going on there!',
-            timeSpent: '6 months (contract)',
-            icon: 'svg/geospatial_pin.svg'
+          title: "Cartographer",
+          coordinates: [37.57173321984548, -122.26613911793154],
+          exp: 'Lots of road network annotation and CLI tools. Working at Zoox was inspiring, pushing me to go back to school!',
+          timeSpent: '6 months (contract)'
         }
-    },
-    {
+      },
+      {
         name: "Uber Technologies",
         properties: {
-            title: "Operations Support",
-            coordinates: [37.37713778058374, -122.03367224710527],
-            exp: 'Learning a lot about the PUDO aspects of navigation mapping and scaling work up for offshore operations. Came in at an interestin time with LLMs emerging 🤫',
-            timeSpent: '8 months & Current',
-            icon: 'svg/geospatial_pin.svg'
+          title: "Operations Support",
+          coordinates: [37.37713778058374, -122.03367224710527],
+          exp: 'Learning about PUDO aspects of navigation mapping and scaling work up for offshore operations.',
+          timeSpent: '8 months & Current'
         }
-    },
+      }
+    ];
 
-  ];
+    // Separate out education and work experience hotspots
+    var educationHotspots = hotspots.slice(0, 3);
+    var workHotspots = hotspots.slice(3);
 
+    // Store markers for toggling
+    var educationMarkers = [];
+    var workMarkers = [];
+    var educationVisible = false;
+    var workVisible = false;
 
+    // Function to toggle education markers
+    function toggleEducationMarkers() {
+      if (educationVisible) {
+        educationMarkers.forEach(marker => map.removeLayer(marker));
+        educationMarkers = [];
+      } else {
+        educationHotspots.forEach(hotspot => {
+          var { coordinates, icon, title, timeSpent, exp } = hotspot.properties;
+          var popupContent = `
+            <h3>${hotspot.name}</h3>
+            <p><b>${title}</b></p>
+            <p>${exp}</p>
+            <p>Duration: ${timeSpent}</p>`;
 
-//iterate over hotspots
-for (var i = 0; i < hotspots.length; i++) {
-    var hotspot = hotspots[i];
-    var properties = hotspot.properties;
+          var marker = L.marker(coordinates, {
+            icon: L.icon({
+              iconUrl: icon,
+              iconSize: [30, 30],
+              popupAnchor: [0, -22],
+              className: "icon"
+            })
+          }).bindPopup(popupContent)
+            .bindTooltip(hotspot.name, { direction: "top" });
 
-    //Coordinates
-    var coordinates = properties.coordinates;
+          marker.addTo(map);
+          educationMarkers.push(marker);
+        });
+      }
+      educationVisible = !educationVisible;
+    }
 
-    //build popup content
-    var popup = 
-      `<h3><center>${hotspot.name}</h3>
-       <p><b>${hotspot.properties.title}</p>
-        <p>${hotspot.properties.exp}</p>
-        <p>Duration</b>: ${hotspot.properties.timeSpent}</p></center>`;
+    // Function to toggle work experience markers
+    function toggleWorkMarkers() {
+      if (workVisible) {
+        workMarkers.forEach(marker => map.removeLayer(marker));
+        workMarkers = [];
+      } else {
+        workHotspots.forEach(hotspot => {
+          var { coordinates, title, timeSpent, exp } = hotspot.properties;
+          var popupContent = `
+            <h3>${hotspot.name}</h3>
+            <p><b>${title}</b></p>
+            <p>${exp}</p>
+            <p>Duration: ${timeSpent}</p>`;
 
-    //icon adjustment
-    var icon = L.icon({
-      iconUrl: properties.icon,
-      iconSize: [30, 30],
-      popupAnchor: [0, -22],
-      className: "icon"
-    });
+          var marker = L.marker(coordinates) // Default Leaflet icon used here
+            .bindPopup(popupContent)
+            .bindTooltip(hotspot.name, { direction: "top" });
 
+          marker.addTo(map);
+          workMarkers.push(marker);
+        });
+      }
+      workVisible = !workVisible;
+    }
 
-  var marker = L.marker(properties.coordinates, {
-   icon: icon
-  })
-
-  .addTo(map)
-  .bindPopup(popup);
-
-  marker.on("click", function() {
-  this.openPopup();
-  });
-
-}
+    // Attach toggle functions to buttons
+    document.getElementById('toggle-education-btn').addEventListener('click', toggleEducationMarkers);
+    document.getElementById('toggle-work-btn').addEventListener('click', toggleWorkMarkers);
   </script>
-
 </body>
 
 </html>
